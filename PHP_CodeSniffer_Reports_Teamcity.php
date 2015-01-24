@@ -3,6 +3,9 @@
 
 class PHP_CodeSniffer_Reports_Teamcity implements \PHP_CodeSniffer_Report
 {
+
+    protected $metrics = [];
+
     /**
      * Generate a partial report for a single processed file.
      *
@@ -24,14 +27,10 @@ class PHP_CodeSniffer_Reports_Teamcity implements \PHP_CodeSniffer_Report
         $width = 80
     ) {
 
-        echo $this->teamcityStatMessage('PHPCS Warnings', $phpcsFile->getWarningCount());
-        echo $this->teamcityStatMessage('PHPCS Errors', $phpcsFile->getErrorCount());
-
+        $this->metrics['PHPCS Warnings'] = +$phpcsFile->getWarningCount();
+        $this->metrics['PHPCS Errors'] = +$phpcsFile->getErrorCount();
 
         $metrics = $phpcsFile->getMetrics();
-        foreach ($metrics as $key => $value) {
-            # echo $this->teamcityStatMessage($key, $value);
-        }
     }
 
     /**
@@ -59,17 +58,18 @@ class PHP_CodeSniffer_Reports_Teamcity implements \PHP_CodeSniffer_Report
         $width = 80,
         $toScreen = true
     ) {
-        echo $cachedData;
+        foreach ($this->metrics as $name => $val) {
+            echo $this->teamcityStatMessage($name, $val);
+        }
     }
-
 
     protected function teamcityStatMessage($key, $value)
     {
-        return sprintf('##teamcity[buildStatisticValue key=\'%s\' value=\'%s\']'.PHP_EOL, $key, $value);
+        return sprintf('##teamcity[buildStatisticValue key=\'%s\' value=\'%s\']' . PHP_EOL, $key, $value);
     }
 
     protected function teamcityReportMessage($type, $path)
     {
-        return sprintf('##teamcity[importData type=\'%s\' path=\'%s\']'.PHP_EOL, $type, $path);
+        return sprintf('##teamcity[importData type=\'%s\' path=\'%s\']' . PHP_EOL, $type, $path);
     }
 }
