@@ -1,0 +1,7 @@
+#!/usr/bin/env php
+<?php
+
+include_once 'vendor/autoload.php';
+
+$cli = new PHP_CodeSniffer_CLI();
+$cli->runphpcs();

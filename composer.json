@@ -13,10 +13,10 @@
         "squizlabs/php_codesniffer": "2.2.0"
     },
     "autoload": {
-        "psr-0": {
-            "": "src/"
-        }
-    },
+            "classmap": [
+                "PHP_CodeSniffer_Reports_Teamcity.php"
+            ]
+        },
     "config": {
         "bin-dir": "bin"
     }
