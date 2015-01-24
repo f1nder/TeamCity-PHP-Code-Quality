@@ -1,0 +1,23 @@
+{
+    "name": "solution/teamcity_php_code_quality",
+    "description": "Integration PHP Code Sniffer and MESS detector into TeamCity 9.0",
+    "minimum-stability": "dev",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Moroz Aleksanr",
+            "email": "netstroix@gmail.com"
+        }
+    ],
+    "require": {
+        "squizlabs/php_codesniffer": "2.2.0"
+    },
+    "autoload": {
+        "psr-0": {
+            "": "src/"
+        }
+    },
+    "config": {
+        "bin-dir": "bin"
+    }
+}
