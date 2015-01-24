@@ -64,7 +64,7 @@ class PHP_CodeSniffer_Reports_Teamcity implements \PHP_CodeSniffer_Report
         echo $this->teamcityStatMessage('PHPCS Total files', $this->report->totalFiles);
         echo $this->teamcityStatMessage('PHPCS Warnings', $this->report->totalWarnings);
         echo $this->teamcityStatMessage('PHPCS Errors', $this->report->totalErrors);
-        echo $this->teamcityReportMessage('junit', 'junit.xml');
+        echo $this->teamcityReportMessage('junit', 'php_cq/junit.xml');
 
     }
 
