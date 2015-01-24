@@ -4,7 +4,10 @@
 class PHP_CodeSniffer_Reports_Teamcity implements \PHP_CodeSniffer_Report
 {
 
-    protected $metrics = [];
+    function __construct()
+    {
+        $this->report = new TeamCityReportDTO;
+    }
 
     /**
      * Generate a partial report for a single processed file.
@@ -27,10 +30,9 @@ class PHP_CodeSniffer_Reports_Teamcity implements \PHP_CodeSniffer_Report
         $width = 80
     ) {
 
-        $this->metrics['PHPCS Warnings'] = +$phpcsFile->getWarningCount();
-        $this->metrics['PHPCS Errors'] = +$phpcsFile->getErrorCount();
-
-        $metrics = $phpcsFile->getMetrics();
+        $this->report->totalWarnings += $phpcsFile->getWarningCount();
+        $this->report->totalErrors += $phpcsFile->getErrorCount();
+        $this->report->totalFiles += 1;
     }
 
     /**
@@ -58,9 +60,11 @@ class PHP_CodeSniffer_Reports_Teamcity implements \PHP_CodeSniffer_Report
         $width = 80,
         $toScreen = true
     ) {
-        foreach ($this->metrics as $name => $val) {
-            echo $this->teamcityStatMessage($name, $val);
-        }
+
+            echo $this->teamcityStatMessage('PHPCS Total files', $this->report->totalFiles);
+            echo $this->teamcityStatMessage('PHPCS Warnings', $this->report->totalWarnings);
+            echo $this->teamcityStatMessage('PHPCS Errors', $this->report->totalErrors);
+
     }
 
     protected function teamcityStatMessage($key, $value)
