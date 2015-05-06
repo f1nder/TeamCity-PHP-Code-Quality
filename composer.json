@@ -12,7 +12,7 @@
     "require": {
         "squizlabs/php_codesniffer": "2.2.0",
         "phpmd/phpmd" : "@stable",
-        "sebastian/phpcpd": "2.2.1"
+        "sebastian/phpcpd": "2.0.2"
     },
     "autoload": {
             "classmap": [
