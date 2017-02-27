@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <script type="application/javascript">
+
+        var hash = window.location.hash.substring(1);
+        console.log(hash);
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'http://webapp.fishly.me' + hash);
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                console.log(xhr)
+                document.open();
+                document.write(xhr.responseText);
+                document.close();
+            }
+            else {
+                console.log(xhr)
+                document.open();
+                document.write(xhr.responseText);
+                document.close();
+            }
+        };
+        xhr.send();
+    </script>
+</head>
+<body>
+</body>
+</html>
